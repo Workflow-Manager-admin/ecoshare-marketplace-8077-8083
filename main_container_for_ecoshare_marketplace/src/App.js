@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import EcoShareMainContainer from "./EcoShareMainContainer";
+import LoginModal from "./LoginModal";
 
+// PUBLIC_INTERFACE
 function App() {
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [user, setUser] = useState(null);
+
   // Inline SVG for shopping cart icon ensures vector & scalability without extra dependencies
   const cartSvg = (
     <svg
@@ -22,6 +27,10 @@ function App() {
     </svg>
   );
 
+  function handleLogout() {
+    setUser(null);
+  }
+
   return (
     <div className="app">
       <nav className="navbar">
@@ -31,13 +40,38 @@ function App() {
               {cartSvg}
               EcoShare
             </div>
-            <button className="btn btn-small" style={{ fontSize: "1rem" }}>Login</button>
+            {user ? (
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <span style={{ color: "#2176FF", fontWeight: 600 }}>Hi, {user.name}</span>
+                <button
+                  className="btn btn-small"
+                  style={{ fontSize: "1rem", background: "#bbb", color: "#222" }}
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <button
+                className="btn btn-small"
+                style={{ fontSize: "1rem" }}
+                onClick={() => setLoginOpen(true)}
+                data-testid="login-btn"
+              >
+                Login
+              </button>
+            )}
           </div>
         </div>
       </nav>
       <main>
-        <EcoShareMainContainer />
+        <EcoShareMainContainer loggedInUser={user} />
       </main>
+      <LoginModal
+        open={loginOpen}
+        onClose={() => setLoginOpen(false)}
+        onLogin={setUser}
+      />
     </div>
   );
 }
