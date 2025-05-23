@@ -6,6 +6,145 @@
   --border-color: rgba(255, 255, 255, 0.1);
 }
 
+.eco-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.eco-create-btn {
+  margin-top: 18px;
+}
+
+.eco-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0 0 0;
+}
+
+.eco-tab {
+  background: none;
+  border: 2px solid var(--kavia-orange);
+  border-radius: 999px;
+  color: var(--kavia-orange);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 18px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.15s, color 0.15s;
+  min-width: 110px;
+}
+
+.eco-tab.active,
+.eco-tab:hover {
+  background: var(--kavia-orange);
+  color: #fff;
+}
+
+.eco-listing-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap: 28px;
+}
+
+.eco-card {
+  background: var(--kavia-dark);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 2px 18px 0 rgba(0,0,0,0.03);
+}
+
+.eco-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 60%;
+  background: #222;
+}
+
+.eco-card-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+}
+
+.eco-card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--kavia-orange);
+  color: #fff;
+  padding: 0.25em 0.7em;
+  border-radius: 14px;
+  font-size: 0.95em;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.eco-card-badge.sale {
+  background: #90ba28;
+}
+
+.eco-card-body {
+  padding: 18px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eco-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.eco-card-description {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+
+.eco-card-price {
+  font-weight: bold;
+  font-size: 1.07em;
+  color: #eee;
+}
+
+.eco-card-postedby {
+  font-size: 0.93em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  margin-top: 2px;
+}
+
+.btn.btn-small {
+  padding: 7px 16px;
+  font-size: 1em;
+  border-radius: 3.5px;
+  background-color: var(--kavia-orange);
+  color: white;
+  border: none;
+  margin-top: 6px;
+}
+
+.eco-empty-state {
+  margin-top: 40px;
+  padding: 48px 0;
+  text-align: center;
+  color: #aaa;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
+}
+
 body {
   margin: 0;
   font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
@@ -15,10 +154,288 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.eco-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.eco-create-btn {
+  margin-top: 18px;
+}
+
+.eco-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0 0 0;
+}
+
+.eco-tab {
+  background: none;
+  border: 2px solid var(--kavia-orange);
+  border-radius: 999px;
+  color: var(--kavia-orange);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 18px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.15s, color 0.15s;
+  min-width: 110px;
+}
+
+.eco-tab.active,
+.eco-tab:hover {
+  background: var(--kavia-orange);
+  color: #fff;
+}
+
+.eco-listing-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap: 28px;
+}
+
+.eco-card {
+  background: var(--kavia-dark);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 2px 18px 0 rgba(0,0,0,0.03);
+}
+
+.eco-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 60%;
+  background: #222;
+}
+
+.eco-card-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+}
+
+.eco-card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--kavia-orange);
+  color: #fff;
+  padding: 0.25em 0.7em;
+  border-radius: 14px;
+  font-size: 0.95em;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.eco-card-badge.sale {
+  background: #90ba28;
+}
+
+.eco-card-body {
+  padding: 18px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eco-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.eco-card-description {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+
+.eco-card-price {
+  font-weight: bold;
+  font-size: 1.07em;
+  color: #eee;
+}
+
+.eco-card-postedby {
+  font-size: 0.93em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  margin-top: 2px;
+}
+
+.btn.btn-small {
+  padding: 7px 16px;
+  font-size: 1em;
+  border-radius: 3.5px;
+  background-color: var(--kavia-orange);
+  color: white;
+  border: none;
+  margin-top: 6px;
+}
+
+.eco-empty-state {
+  margin-top: 40px;
+  padding: 48px 0;
+  text-align: center;
+  color: #aaa;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
+}
+
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.eco-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.eco-create-btn {
+  margin-top: 18px;
+}
+
+.eco-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0 0 0;
+}
+
+.eco-tab {
+  background: none;
+  border: 2px solid var(--kavia-orange);
+  border-radius: 999px;
+  color: var(--kavia-orange);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 18px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.15s, color 0.15s;
+  min-width: 110px;
+}
+
+.eco-tab.active,
+.eco-tab:hover {
+  background: var(--kavia-orange);
+  color: #fff;
+}
+
+.eco-listing-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap: 28px;
+}
+
+.eco-card {
+  background: var(--kavia-dark);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 2px 18px 0 rgba(0,0,0,0.03);
+}
+
+.eco-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 60%;
+  background: #222;
+}
+
+.eco-card-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+}
+
+.eco-card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--kavia-orange);
+  color: #fff;
+  padding: 0.25em 0.7em;
+  border-radius: 14px;
+  font-size: 0.95em;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.eco-card-badge.sale {
+  background: #90ba28;
+}
+
+.eco-card-body {
+  padding: 18px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eco-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.eco-card-description {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+
+.eco-card-price {
+  font-weight: bold;
+  font-size: 1.07em;
+  color: #eee;
+}
+
+.eco-card-postedby {
+  font-size: 0.93em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  margin-top: 2px;
+}
+
+.btn.btn-small {
+  padding: 7px 16px;
+  font-size: 1em;
+  border-radius: 3.5px;
+  background-color: var(--kavia-orange);
+  color: white;
+  border: none;
+  margin-top: 6px;
+}
+
+.eco-empty-state {
+  margin-top: 40px;
+  padding: 48px 0;
+  text-align: center;
+  color: #aaa;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
 }
 
 .navbar {
@@ -35,6 +452,145 @@ body {
   z-index: 100;
 }
 
+.eco-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.eco-create-btn {
+  margin-top: 18px;
+}
+
+.eco-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0 0 0;
+}
+
+.eco-tab {
+  background: none;
+  border: 2px solid var(--kavia-orange);
+  border-radius: 999px;
+  color: var(--kavia-orange);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 18px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.15s, color 0.15s;
+  min-width: 110px;
+}
+
+.eco-tab.active,
+.eco-tab:hover {
+  background: var(--kavia-orange);
+  color: #fff;
+}
+
+.eco-listing-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap: 28px;
+}
+
+.eco-card {
+  background: var(--kavia-dark);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 2px 18px 0 rgba(0,0,0,0.03);
+}
+
+.eco-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 60%;
+  background: #222;
+}
+
+.eco-card-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+}
+
+.eco-card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--kavia-orange);
+  color: #fff;
+  padding: 0.25em 0.7em;
+  border-radius: 14px;
+  font-size: 0.95em;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.eco-card-badge.sale {
+  background: #90ba28;
+}
+
+.eco-card-body {
+  padding: 18px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eco-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.eco-card-description {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+
+.eco-card-price {
+  font-weight: bold;
+  font-size: 1.07em;
+  color: #eee;
+}
+
+.eco-card-postedby {
+  font-size: 0.93em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  margin-top: 2px;
+}
+
+.btn.btn-small {
+  padding: 7px 16px;
+  font-size: 1em;
+  border-radius: 3.5px;
+  background-color: var(--kavia-orange);
+  color: white;
+  border: none;
+  margin-top: 6px;
+}
+
+.eco-empty-state {
+  margin-top: 40px;
+  padding: 48px 0;
+  text-align: center;
+  color: #aaa;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
+}
+
 .logo {
   font-size: 1.25rem;
   font-weight: 600;
@@ -43,8 +599,286 @@ body {
   gap: 8px;
 }
 
+.eco-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.eco-create-btn {
+  margin-top: 18px;
+}
+
+.eco-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0 0 0;
+}
+
+.eco-tab {
+  background: none;
+  border: 2px solid var(--kavia-orange);
+  border-radius: 999px;
+  color: var(--kavia-orange);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 18px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.15s, color 0.15s;
+  min-width: 110px;
+}
+
+.eco-tab.active,
+.eco-tab:hover {
+  background: var(--kavia-orange);
+  color: #fff;
+}
+
+.eco-listing-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap: 28px;
+}
+
+.eco-card {
+  background: var(--kavia-dark);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 2px 18px 0 rgba(0,0,0,0.03);
+}
+
+.eco-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 60%;
+  background: #222;
+}
+
+.eco-card-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+}
+
+.eco-card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--kavia-orange);
+  color: #fff;
+  padding: 0.25em 0.7em;
+  border-radius: 14px;
+  font-size: 0.95em;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.eco-card-badge.sale {
+  background: #90ba28;
+}
+
+.eco-card-body {
+  padding: 18px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eco-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.eco-card-description {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+
+.eco-card-price {
+  font-weight: bold;
+  font-size: 1.07em;
+  color: #eee;
+}
+
+.eco-card-postedby {
+  font-size: 0.93em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  margin-top: 2px;
+}
+
+.btn.btn-small {
+  padding: 7px 16px;
+  font-size: 1em;
+  border-radius: 3.5px;
+  background-color: var(--kavia-orange);
+  color: white;
+  border: none;
+  margin-top: 6px;
+}
+
+.eco-empty-state {
+  margin-top: 40px;
+  padding: 48px 0;
+  text-align: center;
+  color: #aaa;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
+}
+
 .logo-symbol {
   color: var(--kavia-orange);
+}
+
+.eco-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.eco-create-btn {
+  margin-top: 18px;
+}
+
+.eco-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0 0 0;
+}
+
+.eco-tab {
+  background: none;
+  border: 2px solid var(--kavia-orange);
+  border-radius: 999px;
+  color: var(--kavia-orange);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 18px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.15s, color 0.15s;
+  min-width: 110px;
+}
+
+.eco-tab.active,
+.eco-tab:hover {
+  background: var(--kavia-orange);
+  color: #fff;
+}
+
+.eco-listing-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap: 28px;
+}
+
+.eco-card {
+  background: var(--kavia-dark);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 2px 18px 0 rgba(0,0,0,0.03);
+}
+
+.eco-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 60%;
+  background: #222;
+}
+
+.eco-card-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+}
+
+.eco-card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--kavia-orange);
+  color: #fff;
+  padding: 0.25em 0.7em;
+  border-radius: 14px;
+  font-size: 0.95em;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.eco-card-badge.sale {
+  background: #90ba28;
+}
+
+.eco-card-body {
+  padding: 18px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eco-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.eco-card-description {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+
+.eco-card-price {
+  font-weight: bold;
+  font-size: 1.07em;
+  color: #eee;
+}
+
+.eco-card-postedby {
+  font-size: 0.93em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  margin-top: 2px;
+}
+
+.btn.btn-small {
+  padding: 7px 16px;
+  font-size: 1em;
+  border-radius: 3.5px;
+  background-color: var(--kavia-orange);
+  color: white;
+  border: none;
+  margin-top: 6px;
+}
+
+.eco-empty-state {
+  margin-top: 40px;
+  padding: 48px 0;
+  text-align: center;
+  color: #aaa;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
 }
 
 .container {
@@ -53,6 +887,145 @@ body {
   padding: 0 24px;
   width: 100%;
   box-sizing: border-box;
+}
+
+.eco-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.eco-create-btn {
+  margin-top: 18px;
+}
+
+.eco-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0 0 0;
+}
+
+.eco-tab {
+  background: none;
+  border: 2px solid var(--kavia-orange);
+  border-radius: 999px;
+  color: var(--kavia-orange);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 18px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.15s, color 0.15s;
+  min-width: 110px;
+}
+
+.eco-tab.active,
+.eco-tab:hover {
+  background: var(--kavia-orange);
+  color: #fff;
+}
+
+.eco-listing-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap: 28px;
+}
+
+.eco-card {
+  background: var(--kavia-dark);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 2px 18px 0 rgba(0,0,0,0.03);
+}
+
+.eco-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 60%;
+  background: #222;
+}
+
+.eco-card-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+}
+
+.eco-card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--kavia-orange);
+  color: #fff;
+  padding: 0.25em 0.7em;
+  border-radius: 14px;
+  font-size: 0.95em;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.eco-card-badge.sale {
+  background: #90ba28;
+}
+
+.eco-card-body {
+  padding: 18px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eco-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.eco-card-description {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+
+.eco-card-price {
+  font-weight: bold;
+  font-size: 1.07em;
+  color: #eee;
+}
+
+.eco-card-postedby {
+  font-size: 0.93em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  margin-top: 2px;
+}
+
+.btn.btn-small {
+  padding: 7px 16px;
+  font-size: 1em;
+  border-radius: 3.5px;
+  background-color: var(--kavia-orange);
+  color: white;
+  border: none;
+  margin-top: 6px;
+}
+
+.eco-empty-state {
+  margin-top: 40px;
+  padding: 48px 0;
+  text-align: center;
+  color: #aaa;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
 }
 
 .hero {
@@ -65,10 +1038,288 @@ body {
   gap: 24px;
 }
 
+.eco-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.eco-create-btn {
+  margin-top: 18px;
+}
+
+.eco-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0 0 0;
+}
+
+.eco-tab {
+  background: none;
+  border: 2px solid var(--kavia-orange);
+  border-radius: 999px;
+  color: var(--kavia-orange);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 18px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.15s, color 0.15s;
+  min-width: 110px;
+}
+
+.eco-tab.active,
+.eco-tab:hover {
+  background: var(--kavia-orange);
+  color: #fff;
+}
+
+.eco-listing-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap: 28px;
+}
+
+.eco-card {
+  background: var(--kavia-dark);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 2px 18px 0 rgba(0,0,0,0.03);
+}
+
+.eco-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 60%;
+  background: #222;
+}
+
+.eco-card-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+}
+
+.eco-card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--kavia-orange);
+  color: #fff;
+  padding: 0.25em 0.7em;
+  border-radius: 14px;
+  font-size: 0.95em;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.eco-card-badge.sale {
+  background: #90ba28;
+}
+
+.eco-card-body {
+  padding: 18px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eco-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.eco-card-description {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+
+.eco-card-price {
+  font-weight: bold;
+  font-size: 1.07em;
+  color: #eee;
+}
+
+.eco-card-postedby {
+  font-size: 0.93em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  margin-top: 2px;
+}
+
+.btn.btn-small {
+  padding: 7px 16px;
+  font-size: 1em;
+  border-radius: 3.5px;
+  background-color: var(--kavia-orange);
+  color: white;
+  border: none;
+  margin-top: 6px;
+}
+
+.eco-empty-state {
+  margin-top: 40px;
+  padding: 48px 0;
+  text-align: center;
+  color: #aaa;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
+}
+
 .subtitle {
   color: var(--kavia-orange);
   font-weight: 500;
   font-size: 1.1rem;
+}
+
+.eco-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.eco-create-btn {
+  margin-top: 18px;
+}
+
+.eco-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0 0 0;
+}
+
+.eco-tab {
+  background: none;
+  border: 2px solid var(--kavia-orange);
+  border-radius: 999px;
+  color: var(--kavia-orange);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 18px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.15s, color 0.15s;
+  min-width: 110px;
+}
+
+.eco-tab.active,
+.eco-tab:hover {
+  background: var(--kavia-orange);
+  color: #fff;
+}
+
+.eco-listing-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap: 28px;
+}
+
+.eco-card {
+  background: var(--kavia-dark);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 2px 18px 0 rgba(0,0,0,0.03);
+}
+
+.eco-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 60%;
+  background: #222;
+}
+
+.eco-card-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+}
+
+.eco-card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--kavia-orange);
+  color: #fff;
+  padding: 0.25em 0.7em;
+  border-radius: 14px;
+  font-size: 0.95em;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.eco-card-badge.sale {
+  background: #90ba28;
+}
+
+.eco-card-body {
+  padding: 18px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eco-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.eco-card-description {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+
+.eco-card-price {
+  font-weight: bold;
+  font-size: 1.07em;
+  color: #eee;
+}
+
+.eco-card-postedby {
+  font-size: 0.93em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  margin-top: 2px;
+}
+
+.btn.btn-small {
+  padding: 7px 16px;
+  font-size: 1em;
+  border-radius: 3.5px;
+  background-color: var(--kavia-orange);
+  color: white;
+  border: none;
+  margin-top: 6px;
+}
+
+.eco-empty-state {
+  margin-top: 40px;
+  padding: 48px 0;
+  text-align: center;
+  color: #aaa;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
 }
 
 .title {
@@ -78,12 +1329,290 @@ body {
   margin: 0;
 }
 
+.eco-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.eco-create-btn {
+  margin-top: 18px;
+}
+
+.eco-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0 0 0;
+}
+
+.eco-tab {
+  background: none;
+  border: 2px solid var(--kavia-orange);
+  border-radius: 999px;
+  color: var(--kavia-orange);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 18px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.15s, color 0.15s;
+  min-width: 110px;
+}
+
+.eco-tab.active,
+.eco-tab:hover {
+  background: var(--kavia-orange);
+  color: #fff;
+}
+
+.eco-listing-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap: 28px;
+}
+
+.eco-card {
+  background: var(--kavia-dark);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 2px 18px 0 rgba(0,0,0,0.03);
+}
+
+.eco-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 60%;
+  background: #222;
+}
+
+.eco-card-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+}
+
+.eco-card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--kavia-orange);
+  color: #fff;
+  padding: 0.25em 0.7em;
+  border-radius: 14px;
+  font-size: 0.95em;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.eco-card-badge.sale {
+  background: #90ba28;
+}
+
+.eco-card-body {
+  padding: 18px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eco-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.eco-card-description {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+
+.eco-card-price {
+  font-weight: bold;
+  font-size: 1.07em;
+  color: #eee;
+}
+
+.eco-card-postedby {
+  font-size: 0.93em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  margin-top: 2px;
+}
+
+.btn.btn-small {
+  padding: 7px 16px;
+  font-size: 1em;
+  border-radius: 3.5px;
+  background-color: var(--kavia-orange);
+  color: white;
+  border: none;
+  margin-top: 6px;
+}
+
+.eco-empty-state {
+  margin-top: 40px;
+  padding: 48px 0;
+  text-align: center;
+  color: #aaa;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
+}
+
 .description {
   font-size: 1.1rem;
   line-height: 1.5;
   color: var(--text-secondary);
   max-width: 600px;
   margin-bottom: 16px;
+}
+
+.eco-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.eco-create-btn {
+  margin-top: 18px;
+}
+
+.eco-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0 0 0;
+}
+
+.eco-tab {
+  background: none;
+  border: 2px solid var(--kavia-orange);
+  border-radius: 999px;
+  color: var(--kavia-orange);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 18px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.15s, color 0.15s;
+  min-width: 110px;
+}
+
+.eco-tab.active,
+.eco-tab:hover {
+  background: var(--kavia-orange);
+  color: #fff;
+}
+
+.eco-listing-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap: 28px;
+}
+
+.eco-card {
+  background: var(--kavia-dark);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 2px 18px 0 rgba(0,0,0,0.03);
+}
+
+.eco-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 60%;
+  background: #222;
+}
+
+.eco-card-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+}
+
+.eco-card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--kavia-orange);
+  color: #fff;
+  padding: 0.25em 0.7em;
+  border-radius: 14px;
+  font-size: 0.95em;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.eco-card-badge.sale {
+  background: #90ba28;
+}
+
+.eco-card-body {
+  padding: 18px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eco-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.eco-card-description {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+
+.eco-card-price {
+  font-weight: bold;
+  font-size: 1.07em;
+  color: #eee;
+}
+
+.eco-card-postedby {
+  font-size: 0.93em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  margin-top: 2px;
+}
+
+.btn.btn-small {
+  padding: 7px 16px;
+  font-size: 1em;
+  border-radius: 3.5px;
+  background-color: var(--kavia-orange);
+  color: white;
+  border: none;
+  margin-top: 6px;
+}
+
+.eco-empty-state {
+  margin-top: 40px;
+  padding: 48px 0;
+  text-align: center;
+  color: #aaa;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
 }
 
 .btn {
@@ -98,11 +1627,428 @@ body {
   transition: background-color 0.2s ease;
 }
 
+.eco-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.eco-create-btn {
+  margin-top: 18px;
+}
+
+.eco-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0 0 0;
+}
+
+.eco-tab {
+  background: none;
+  border: 2px solid var(--kavia-orange);
+  border-radius: 999px;
+  color: var(--kavia-orange);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 18px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.15s, color 0.15s;
+  min-width: 110px;
+}
+
+.eco-tab.active,
+.eco-tab:hover {
+  background: var(--kavia-orange);
+  color: #fff;
+}
+
+.eco-listing-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap: 28px;
+}
+
+.eco-card {
+  background: var(--kavia-dark);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 2px 18px 0 rgba(0,0,0,0.03);
+}
+
+.eco-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 60%;
+  background: #222;
+}
+
+.eco-card-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+}
+
+.eco-card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--kavia-orange);
+  color: #fff;
+  padding: 0.25em 0.7em;
+  border-radius: 14px;
+  font-size: 0.95em;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.eco-card-badge.sale {
+  background: #90ba28;
+}
+
+.eco-card-body {
+  padding: 18px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eco-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.eco-card-description {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+
+.eco-card-price {
+  font-weight: bold;
+  font-size: 1.07em;
+  color: #eee;
+}
+
+.eco-card-postedby {
+  font-size: 0.93em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  margin-top: 2px;
+}
+
+.btn.btn-small {
+  padding: 7px 16px;
+  font-size: 1em;
+  border-radius: 3.5px;
+  background-color: var(--kavia-orange);
+  color: white;
+  border: none;
+  margin-top: 6px;
+}
+
+.eco-empty-state {
+  margin-top: 40px;
+  padding: 48px 0;
+  text-align: center;
+  color: #aaa;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
+}
+
 .btn:hover {
   background-color: #FF8B4D;
+}
+
+.eco-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.eco-create-btn {
+  margin-top: 18px;
+}
+
+.eco-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0 0 0;
+}
+
+.eco-tab {
+  background: none;
+  border: 2px solid var(--kavia-orange);
+  border-radius: 999px;
+  color: var(--kavia-orange);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 18px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.15s, color 0.15s;
+  min-width: 110px;
+}
+
+.eco-tab.active,
+.eco-tab:hover {
+  background: var(--kavia-orange);
+  color: #fff;
+}
+
+.eco-listing-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap: 28px;
+}
+
+.eco-card {
+  background: var(--kavia-dark);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 2px 18px 0 rgba(0,0,0,0.03);
+}
+
+.eco-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 60%;
+  background: #222;
+}
+
+.eco-card-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+}
+
+.eco-card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--kavia-orange);
+  color: #fff;
+  padding: 0.25em 0.7em;
+  border-radius: 14px;
+  font-size: 0.95em;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.eco-card-badge.sale {
+  background: #90ba28;
+}
+
+.eco-card-body {
+  padding: 18px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eco-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.eco-card-description {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+
+.eco-card-price {
+  font-weight: bold;
+  font-size: 1.07em;
+  color: #eee;
+}
+
+.eco-card-postedby {
+  font-size: 0.93em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  margin-top: 2px;
+}
+
+.btn.btn-small {
+  padding: 7px 16px;
+  font-size: 1em;
+  border-radius: 3.5px;
+  background-color: var(--kavia-orange);
+  color: white;
+  border: none;
+  margin-top: 6px;
+}
+
+.eco-empty-state {
+  margin-top: 40px;
+  padding: 48px 0;
+  text-align: center;
+  color: #aaa;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
 }
 
 .btn-large {
   padding: 12px 24px;
   font-size: 1.1rem;
+}
+
+.eco-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.eco-create-btn {
+  margin-top: 18px;
+}
+
+.eco-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0 0 0;
+}
+
+.eco-tab {
+  background: none;
+  border: 2px solid var(--kavia-orange);
+  border-radius: 999px;
+  color: var(--kavia-orange);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 18px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.15s, color 0.15s;
+  min-width: 110px;
+}
+
+.eco-tab.active,
+.eco-tab:hover {
+  background: var(--kavia-orange);
+  color: #fff;
+}
+
+.eco-listing-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap: 28px;
+}
+
+.eco-card {
+  background: var(--kavia-dark);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 2px 18px 0 rgba(0,0,0,0.03);
+}
+
+.eco-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 60%;
+  background: #222;
+}
+
+.eco-card-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+}
+
+.eco-card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--kavia-orange);
+  color: #fff;
+  padding: 0.25em 0.7em;
+  border-radius: 14px;
+  font-size: 0.95em;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.eco-card-badge.sale {
+  background: #90ba28;
+}
+
+.eco-card-body {
+  padding: 18px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eco-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.eco-card-description {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+
+.eco-card-price {
+  font-weight: bold;
+  font-size: 1.07em;
+  color: #eee;
+}
+
+.eco-card-postedby {
+  font-size: 0.93em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  margin-top: 2px;
+}
+
+.btn.btn-small {
+  padding: 7px 16px;
+  font-size: 1em;
+  border-radius: 3.5px;
+  background-color: var(--kavia-orange);
+  color: white;
+  border: none;
+  margin-top: 6px;
+}
+
+.eco-empty-state {
+  margin-top: 40px;
+  padding: 48px 0;
+  text-align: center;
+  color: #aaa;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
 }
