@@ -98,34 +98,51 @@ function EcoShareMainContainer({ loggedInUser }) {
     ]);
   }
 
-  // Handler for "Buy" on a sale item
+  // Handler for Buy (opens sidebar modal)
   // PUBLIC_INTERFACE
-  function handleBuy(listingId) {
-    setListings((prev) =>
-      prev.map((l) =>
-        l.id === listingId ? { ...l, status: "Purchased" } : l
-      )
-    );
-    setToast({
-      type: "success",
-      text: "Item marked as Purchased! This is a frontend demo. (No real transaction sent.)",
-      key: `${listingId}_buy_${Date.now()}`
+  function handleBuy(listing) {
+    setDetailsModal({
+      open: true,
+      mode: "buy",
+      item: listing,
     });
   }
 
-  // Handler for "Request" on a donation item
+  // Handler for Request (opens sidebar modal)
   // PUBLIC_INTERFACE
-  function handleRequest(listingId) {
+  function handleRequest(listing) {
+    setDetailsModal({
+      open: true,
+      mode: "request",
+      item: listing,
+    });
+  }
+
+  // Handle details modal submit (update status, show toast, close sidebar)
+  function handleDetailsSubmit({ id, mode }) {
     setListings((prev) =>
       prev.map((l) =>
-        l.id === listingId ? { ...l, status: "Requested" } : l
+        l.id === id
+          ? {
+              ...l,
+              status: mode === "buy" ? "Purchased" : "Requested",
+            }
+          : l
       )
     );
     setToast({
       type: "success",
-      text: "Request sent! This is a frontend demo. (No data sent to seller yet.)",
-      key: `${listingId}_request_${Date.now()}`
+      text:
+        mode === "buy"
+          ? "Item marked as Purchased! This is a frontend demo. (No real transaction sent.)"
+          : "Request sent! This is a frontend demo. (No data sent to seller yet.)",
+      key: `${id}_${mode}_${Date.now()}`,
     });
+    setDetailsModal({ open: false, mode: null, item: null });
+  }
+
+  function closeDetailsModal() {
+    setDetailsModal({ open: false, mode: null, item: null });
   }
 
   function closeToast() {
