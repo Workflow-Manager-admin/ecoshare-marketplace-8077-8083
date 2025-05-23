@@ -287,3 +287,59 @@ body {
 .eco-footer-platform {
   color: #90ba28;
 }
+
+/* --- MODAL --- */
+.eco-modal-backdrop {
+  position: fixed;
+  z-index: 1002;
+  inset: 0;
+  background: rgba(17, 29, 36, 0.19);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: ecoFadeIn 90ms cubic-bezier(.48,.44,.11,1.08);
+}
+.eco-modal {
+  box-sizing: border-box;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 7px 62px 0 rgba(44,47,74,0.18), 0 1.5px 9px rgba(52,65,134,0.09);
+  padding: 32px 32px 25px 32px;
+  min-width: 320px;
+  max-width: 430px;
+  animation: ecoPopIn 0.18s cubic-bezier(.42,.22,.88,1.2);
+}
+@keyframes ecoPopIn {
+  0% { transform: scale(.95); opacity: 0.76;}
+  90% { transform: scale(1.02);}
+  100% { transform: scale(1); opacity: 1;}
+}
+@keyframes ecoFadeIn {
+  0% { opacity: 0;}
+  100% { opacity: 1;}
+}
+
+.eco-input {
+  margin-top: 3px;
+  margin-bottom: 2px;
+  border-radius: 7px;
+  border: 1.5px solid var(--border-color);
+  background: #fafbfc;
+  font-size: 1rem;
+  color: #27282a;
+  padding: 8px 12px;
+  width: 100%;
+  outline: none;
+  transition: border 0.13s, box-shadow 0.14s;
+  box-shadow: 0 1px 2px 0 rgba(90, 150, 220, 0.05);
+}
+.eco-input:focus {
+  border-color: var(--vivid-blue);
+  background: #fff;
+  box-shadow: 0 2.7px 14px 0 rgba(33, 118, 255, 0.08);
+}
+.eco-input[disabled] {
+  background: #f4f4f8;
+  color: #b4b7b8;
+  border-color: #e7e8ef;
+}
