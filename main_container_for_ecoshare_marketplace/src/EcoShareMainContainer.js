@@ -65,6 +65,13 @@ function EcoShareMainContainer({ loggedInUser }) {
   );
   const [modalOpen, setModalOpen] = useState(false);
 
+  // Details modal state
+  const [detailsModal, setDetailsModal] = useState({
+    open: false,
+    mode: null,      // "buy" or "request"
+    item: null,
+  });
+
   // Local state for showing confirmation toasts (id, text, type)
   const [toast, setToast] = useState(null);
 
