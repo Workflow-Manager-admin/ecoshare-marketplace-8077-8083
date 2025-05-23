@@ -19,6 +19,9 @@ function ListItemModal({ open, onClose, onSubmit }) {
   const [imageError, setImageError] = useState(""); // UI feedback for invalid images
   const [submitted, setSubmitted] = useState(false);
 
+  // To manually clear input value when image is removed
+  const imageInputRef = React.useRef();
+
   // Reset form and image on modal close/open toggle
   React.useEffect(() => {
     if (open) {
