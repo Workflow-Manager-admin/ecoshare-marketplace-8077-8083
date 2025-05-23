@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import ListItemModal from "./ListItemModal";
 
 /**
  * Placeholder mock data for user listings in EcoShare.
@@ -12,6 +13,7 @@ const MOCK_LISTINGS = [
     price: 15,
     isDonation: false,
     postedBy: "Alice",
+    category: "Furniture",
     img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=300&q=80"
   },
   {
@@ -20,6 +22,7 @@ const MOCK_LISTINGS = [
     description: "A bundle of 8 bedtime favorites. Free to a good home!",
     isDonation: true,
     postedBy: "Ben",
+    category: "Books",
     img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=300&q=80"
   },
   {
@@ -29,6 +32,7 @@ const MOCK_LISTINGS = [
     price: 10,
     isDonation: false,
     postedBy: "Charlie",
+    category: "Appliances",
     img: "https://images.unsplash.com/photo-1519864600565-cb8ae3e161ae?auto=format&fit=crop&w=300&q=80"
   },
   {
@@ -37,21 +41,21 @@ const MOCK_LISTINGS = [
     description: "Men's Large. No rips, very warm. Available for donation.",
     isDonation: true,
     postedBy: "Diana",
+    category: "Clothing",
     img: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=300&q=80"
   }
 ];
 
 /**
  * Renders the main container for EcoShare.
- * Contains header, filters, listings, and placeholder interactivity for listing, sale, and donation.
+ * Contains header, filters, listings, and "List an Item" with modal for submission.
  */
 // PUBLIC_INTERFACE
-function EcoShareMainContainer() {
+function EcoShareMainContainer({ loggedInUser }) {
   // Internal state for the filter and listings (mock state)
   const [selectedTab, setSelectedTab] = useState("all"); // 'all', 'sale', 'donation', 'my-listings'
   const [listings, setListings] = useState(MOCK_LISTINGS);
-  // Placeholder "logged-in user" for demo purposes
-  const user = { name: "Alice" };
+  const [modalOpen, setModalOpen] = useState(false);
 
   /**
    * Handler for the tab/filter selection.
@@ -62,12 +66,26 @@ function EcoShareMainContainer() {
   }
 
   /**
-   * Handler for creating a new listing (opens modal in full app; here just alerts).
+   * Handler for creating a new listing (opens modal).
    */
   // PUBLIC_INTERFACE
   function handleCreateListing() {
-    // In a full version, open a creation modal or page.
-    window.alert("Placeholder: Open create listing modal.");
+    setModalOpen(true);
+  }
+
+  /**
+   * Handler for successful listing.
+   */
+  // PUBLIC_INTERFACE
+  function handleSubmitListing(listing) {
+    setListings((prev) => [
+      {
+        ...listing,
+        postedBy: loggedInUser?.name || "Anonymous",
+        isDonation: !!listing.isDonation,
+      },
+      ...prev
+    ]);
   }
 
   /**
@@ -81,7 +99,9 @@ function EcoShareMainContainer() {
       case "donation":
         return listings.filter((l) => l.isDonation);
       case "my-listings":
-        return listings.filter((l) => l.postedBy === user.name);
+        return loggedInUser
+          ? listings.filter((l) => l.postedBy === loggedInUser.name)
+          : [];
       case "all":
       default:
         return listings;
@@ -113,6 +133,8 @@ function EcoShareMainContainer() {
         <button
           className={`eco-tab${selectedTab === "my-listings" ? " active" : ""}`}
           onClick={() => handleTabChange("my-listings")}
+          disabled={!loggedInUser}
+          style={!loggedInUser ? { opacity: 0.55, cursor: "not-allowed" } : {}}
         >
           My Listings
         </button>
@@ -186,7 +208,7 @@ function EcoShareMainContainer() {
     );
   }
 
-    // Main container UI
+  // Main container UI
   return (
     <div className="container eco-main">
       <div className="eco-main-header-row">
@@ -201,6 +223,11 @@ function EcoShareMainContainer() {
         <button
           className="btn btn-large eco-create-btn"
           onClick={handleCreateListing}
+          disabled={!loggedInUser}
+          style={!loggedInUser
+            ? { opacity: 0.55, cursor: "not-allowed" }
+            : {}
+          }
         >
           + List an Item
         </button>
@@ -209,6 +236,11 @@ function EcoShareMainContainer() {
       <div style={{ marginTop: 32 }}>
         {renderListingGrid(getFilteredListings())}
       </div>
+      <ListItemModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSubmit={handleSubmitListing}
+      />
       {/* Footer */}
       <footer className="eco-footer">
         <div>
