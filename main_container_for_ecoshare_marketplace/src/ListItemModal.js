@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "./App.css";
 
-// PUBLIC_INTERFACE
+/**
+ * PUBLIC_INTERFACE
+ * ListItemModal - Modal dialog for listing an item, now with image upload and preview support.
+ */
 function ListItemModal({ open, onClose, onSubmit }) {
   // Local state for form fields
   const [form, setForm] = useState({
@@ -11,7 +14,28 @@ function ListItemModal({ open, onClose, onSubmit }) {
     price: "",
     isDonation: false,
   });
+  const [imageFile, setImageFile] = useState(null); // actual File object
+  const [imageDataUrl, setImageDataUrl] = useState(""); // base64 for preview/submit
+  const [imageError, setImageError] = useState(""); // UI feedback for invalid images
   const [submitted, setSubmitted] = useState(false);
+
+  // Reset form and image on modal close/open toggle
+  React.useEffect(() => {
+    if (open) {
+      setImageFile(null);
+      setImageDataUrl("");
+      setImageError("");
+      setForm({
+        title: "",
+        description: "",
+        category: "",
+        price: "",
+        isDonation: false,
+      });
+      setSubmitted(false);
+    }
+    // eslint-disable-next-line
+  }, [open]);
 
   if (!open) return null;
 
@@ -25,6 +49,50 @@ function ListItemModal({ open, onClose, onSubmit }) {
     }));
   }
 
+  // PUBLIC_INTERFACE
+  function handleImageChange(e) {
+    setImageError("");
+    const file = e.target.files && e.target.files[0];
+    if (!file) {
+      setImageFile(null);
+      setImageDataUrl("");
+      return;
+    }
+    // Only allow image files under 4MB
+    if (!file.type.startsWith("image/")) {
+      setImageFile(null);
+      setImageDataUrl("");
+      setImageError("File is not an image");
+      return;
+    }
+    if (file.size > 4 * 1024 * 1024) {
+      setImageFile(null);
+      setImageDataUrl("");
+      setImageError("Image must be less than 4MB");
+      return;
+    }
+    setImageFile(file);
+
+    // Read as dataURL for preview
+    const reader = new window.FileReader();
+    reader.onload = (loadEvt) => {
+      setImageDataUrl(loadEvt.target.result);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // PUBLIC_INTERFACE
+  function handleRemoveImage(e) {
+    e.preventDefault();
+    setImageFile(null);
+    setImageDataUrl("");
+    setImageError("");
+    // Clear the file input value (need to trigger new selection for same file)
+    if (imageInputRef.current) {
+      imageInputRef.current.value = "";
+    }
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     setSubmitted(true);
@@ -33,7 +101,8 @@ function ListItemModal({ open, onClose, onSubmit }) {
         ...form,
         price: form.isDonation ? undefined : Number(form.price) || undefined,
         id: Date.now(),
-        img: "https://images.unsplash.com/photo-1526178613658-3d07e1b13149?auto=format&fit=crop&w=300&q=80", // Placeholder image
+        img: imageDataUrl ||
+          "https://images.unsplash.com/photo-1526178613658-3d07e1b13149?auto=format&fit=crop&w=300&q=80", // Fallback
       });
       setForm({
         title: "",
@@ -42,10 +111,16 @@ function ListItemModal({ open, onClose, onSubmit }) {
         price: "",
         isDonation: false,
       });
+      setImageFile(null);
+      setImageDataUrl("");
+      setImageError("");
       setSubmitted(false);
       onClose();
     }, 700);
   }
+
+  // To manually clear input value when image is removed
+  const imageInputRef = React.useRef();
 
   return (
     <div className="eco-modal-backdrop" tabIndex={-1}>
@@ -123,32 +198,106 @@ function ListItemModal({ open, onClose, onSubmit }) {
                 />
               </label>
             </div>
+
+            {/* Image upload with preview */}
             <div>
-              <div
-                style={{
-                  width: 68,
-                  height: 48,
-                  background: "#f0f1f5",
-                  borderRadius: 9,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: 20,
-                  color: "#a5a7a9",
-                  marginBottom: 6,
-                  marginTop: 2,
-                  cursor: "not-allowed",
-                  border: "1.5px dashed var(--border-color)"
-                }}
-                aria-label="Image upload"
-                title="Image uploads coming soon"
-              >
-                <span role="img" aria-label="camera">📷</span>
+              <label style={{ display: "block", marginBottom: "4px", fontWeight: 500 }}>
+                Item Image&nbsp;
+                <span style={{ color: "#aaa", fontWeight: 400, fontSize: 13 }}>
+                  (optional&nbsp;—&nbsp;max 4MB)
+                </span>
+              </label>
+              <div style={{
+                display: "flex", alignItems: "center", gap: 12,
+                marginBottom: 2,
+              }}>
+                {imageDataUrl ? (
+                  <div style={{
+                    width: 64, height: 48,
+                    borderRadius: 9,
+                    overflow: "hidden",
+                    border: "1.5px solid var(--border-color)",
+                    background: "#f8f8f8",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                  }}>
+                    <img
+                      src={imageDataUrl}
+                      alt="Preview"
+                      style={{
+                        display: "block",
+                        width: "100%", height: "100%",
+                        objectFit: "cover"
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <div style={{
+                    width: 64, height: 48,
+                    borderRadius: 9,
+                    background: "#f0f1f5",
+                    border: "1.5px dashed var(--border-color)",
+                    color: "#a5a7a9",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: 22,
+                  }}>
+                    <span role="img" aria-label="camera">📷</span>
+                  </div>
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={imageInputRef}
+                  onChange={handleImageChange}
+                  style={{ display: "none" }}
+                  aria-label="Choose item image"
+                  tabIndex={-1}
+                />
+                <button
+                  type="button"
+                  className="btn btn-small"
+                  style={{
+                    padding: "6px 16px",
+                    fontSize: 15,
+                    border: "1.1px solid #c2c6cf",
+                    background: "var(--vivid-blue)",
+                    color: "#fff",
+                  }}
+                  onClick={() => {
+                    if (imageInputRef.current) {
+                      imageInputRef.current.click();
+                    }
+                  }}
+                  disabled={submitted}
+                >
+                  {imageDataUrl ? "Change" : "Upload"}
+                </button>
+                {imageDataUrl && (
+                  <button
+                    type="button"
+                    className="btn btn-small"
+                    style={{
+                      background: "#bbb", color: "#333",
+                      marginLeft: 0,
+                      padding: "6px 12px",
+                      fontSize: 14,
+                    }}
+                    onClick={handleRemoveImage}
+                    aria-label="Remove image"
+                    disabled={submitted}
+                  >Remove</button>
+                )}
               </div>
-              <span style={{ fontSize: 13, color: "var(--text-secondary)" }}>
-                <i>Image upload coming soon</i>
-              </span>
+              {imageError && (
+                <div style={{ color: "#c0373d", fontSize: 13, marginTop: 2 }}>{imageError}</div>
+              )}
+              {!imageDataUrl && (
+                <span style={{ fontSize: 13, color: "var(--text-secondary)" }}>
+                  <i>JPG, PNG, and GIF are supported. For best results, use 4:3 landscape images.</i>
+                </span>
+              )}
             </div>
+            {/* End image upload */}
+
             <div style={{ display: "flex", gap: 9, marginTop: 6 }}>
               <button
                 type="button"
