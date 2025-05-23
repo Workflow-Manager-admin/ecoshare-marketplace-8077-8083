@@ -186,13 +186,16 @@ function EcoShareMainContainer() {
     );
   }
 
-  // Main container UI
+    // Main container UI
   return (
-    <div className="container" style={{ paddingTop: 140 }}>
-      <div className="eco-header">
-        <h1 className="title">EcoShare Marketplace</h1>
-        <div className="description">
-          A community-driven e-shopping platform for selling or donating used products. Promote sustainability and help others find affordable, quality items.
+    <div className="container eco-main">
+      <div className="eco-main-header-row">
+        <div>
+          <h1 className="title" style={{marginBottom: 4}}>EcoShare Marketplace</h1>
+          <div className="description" style={{marginTop: 2}}>
+            A community-driven e-shopping platform for selling or donating used products.<br />
+            Promote <span style={{ color: 'var(--kavia-orange)' }}>sustainability</span> and help others find affordable, quality items.
+          </div>
         </div>
         {/* Listing button */}
         <button
@@ -206,6 +209,12 @@ function EcoShareMainContainer() {
       <div style={{ marginTop: 32 }}>
         {renderListingGrid(getFilteredListings())}
       </div>
+      {/* Footer */}
+      <footer className="eco-footer">
+        <div>
+          &copy; {new Date().getFullYear()} <span className="eco-footer-brand">EcoShare Marketplace</span> &mdash; For Sustainability&nbsp;|&nbsp;<span className="eco-footer-platform">Kavia Platform</span>
+        </div>
+      </footer>
     </div>
   );
 }
