@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import ListItemModal from "./ListItemModal";
+import DetailsSidebarModal from "./DetailsSidebarModal";
 
 /**
  * Placeholder mock data for user listings in EcoShare.
