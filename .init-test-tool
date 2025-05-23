@@ -1,0 +1,4 @@
+{
+    "command": "npm run test",
+    "working_directory": "/home/kavia/workspace/code-generation/ecoshare-marketplace-8077-8083/main_container_for_ecoshare_marketplace"
+}
