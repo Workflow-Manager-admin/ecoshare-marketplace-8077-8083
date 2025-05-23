@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 
 /**
- * Placeholder mock data for user listings in the EcoShare Marketplace.
+ * Placeholder mock data for user listings in EcoShare.
  */
 const MOCK_LISTINGS = [
   {
@@ -42,7 +42,7 @@ const MOCK_LISTINGS = [
 ];
 
 /**
- * Renders the main container for the EcoShare Marketplace.
+ * Renders the main container for EcoShare.
  * Contains header, filters, listings, and placeholder interactivity for listing, sale, and donation.
  */
 // PUBLIC_INTERFACE
