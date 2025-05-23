@@ -50,32 +50,33 @@ const MOCK_LISTINGS = [
  * Renders the main container for EcoShare.
  * Contains header, filters, listings, and "List an Item" with modal for submission.
  */
-// PUBLIC_INTERFACE
+/**
+ * PUBLIC_INTERFACE
+ * EcoShareMainContainer - Main UI logic for listings in EcoShare.
+ * Adds 'Buy' and 'Request' frontend-only actions with stylish confirmation feedback and state.
+ */
 function EcoShareMainContainer({ loggedInUser }) {
   // Internal state for the filter and listings (mock state)
-  const [selectedTab, setSelectedTab] = useState("all"); // 'all', 'sale', 'donation', 'my-listings'
-  const [listings, setListings] = useState(MOCK_LISTINGS);
+  const [selectedTab, setSelectedTab] = useState("all");
+  const [listings, setListings] = useState(
+    // Initialize with status as undefined (not yet bought/requested)
+    MOCK_LISTINGS.map((listing) => ({ ...listing, status: undefined }))
+  );
   const [modalOpen, setModalOpen] = useState(false);
 
-  /**
-   * Handler for the tab/filter selection.
-   */
+  // Local state for showing confirmation toasts (id, text, type)
+  const [toast, setToast] = useState(null);
+
   // PUBLIC_INTERFACE
   function handleTabChange(tab) {
     setSelectedTab(tab);
   }
 
-  /**
-   * Handler for creating a new listing (opens modal).
-   */
   // PUBLIC_INTERFACE
   function handleCreateListing() {
     setModalOpen(true);
   }
 
-  /**
-   * Handler for successful listing.
-   */
   // PUBLIC_INTERFACE
   function handleSubmitListing(listing) {
     setListings((prev) => [
@@ -83,14 +84,46 @@ function EcoShareMainContainer({ loggedInUser }) {
         ...listing,
         postedBy: loggedInUser?.name || "Anonymous",
         isDonation: !!listing.isDonation,
+        status: undefined,
       },
-      ...prev
+      ...prev,
     ]);
   }
 
-  /**
-   * Filters listings according to the selected tab.
-   */
+  // Handler for "Buy" on a sale item
+  // PUBLIC_INTERFACE
+  function handleBuy(listingId) {
+    setListings((prev) =>
+      prev.map((l) =>
+        l.id === listingId ? { ...l, status: "Purchased" } : l
+      )
+    );
+    setToast({
+      type: "success",
+      text: "Item marked as Purchased! This is a frontend demo. (No real transaction sent.)",
+      key: `${listingId}_buy_${Date.now()}`
+    });
+  }
+
+  // Handler for "Request" on a donation item
+  // PUBLIC_INTERFACE
+  function handleRequest(listingId) {
+    setListings((prev) =>
+      prev.map((l) =>
+        l.id === listingId ? { ...l, status: "Requested" } : l
+      )
+    );
+    setToast({
+      type: "success",
+      text: "Request sent! This is a frontend demo. (No data sent to seller yet.)",
+      key: `${listingId}_request_${Date.now()}`
+    });
+  }
+
+  function closeToast() {
+    setToast(null);
+  }
+
   // PUBLIC_INTERFACE
   function getFilteredListings() {
     switch (selectedTab) {
@@ -108,7 +141,6 @@ function EcoShareMainContainer({ loggedInUser }) {
     }
   }
 
-  // UI for the tab filters
   function renderTabs() {
     return (
       <div className="eco-tabs">
@@ -142,6 +174,72 @@ function EcoShareMainContainer({ loggedInUser }) {
     );
   }
 
+  // Renders either Buy or Request button, disabled if already requested/purchased
+  function renderActions(listing) {
+    // If already requested/purchased, show inline message instead of button
+    if (listing.status === "Purchased") {
+      return (
+        <div style={{
+          marginTop: 9,
+          fontWeight: 500,
+          color: "var(--vivid-blue)",
+          background: "#e9f3ff",
+          borderRadius: 8,
+          padding: "6px 12px",
+          fontSize: "0.99em"
+        }}>
+          Purchased!
+        </div>
+      );
+    }
+    if (listing.status === "Requested") {
+      return (
+        <div style={{
+          marginTop: 9,
+          fontWeight: 500,
+          color: "#20853b",
+          background: "#edfae9",
+          borderRadius: 8,
+          padding: "6px 12px",
+          fontSize: "0.99em"
+        }}>
+          Requested!
+        </div>
+      );
+    }
+
+    // Not yet performed: show prominent button
+    if (!listing.isDonation) {
+      // Buy for Sale items
+      return (
+        <button
+          className="btn btn-small"
+          style={{
+            width: "100%",
+            marginTop: 9
+          }}
+          onClick={() => handleBuy(listing.id)}
+        >
+          Buy
+        </button>
+      );
+    } else {
+      // Request for Donation items
+      return (
+        <button
+          className="btn btn-small"
+          style={{
+            width: "100%",
+            marginTop: 9
+          }}
+          onClick={() => handleRequest(listing.id)}
+        >
+          Request
+        </button>
+      );
+    }
+  }
+
   // UI for a single item card
   function renderListingCard(listing) {
     return (
@@ -168,34 +266,13 @@ function EcoShareMainContainer({ loggedInUser }) {
           <div className="eco-card-postedby">
             <span>By {listing.postedBy}</span>
           </div>
-          {/* Placeholder buttons for interacting with items */}
-          {!listing.isDonation ? (
-            <button
-              className="btn btn-small"
-              onClick={() =>
-                window.alert("Placeholder: Purchase flow for " + listing.title)
-              }
-            >
-              Buy
-            </button>
-          ) : (
-            <button
-              className="btn btn-small"
-              onClick={() =>
-                window.alert(
-                  "Placeholder: Request for donation—" + listing.title
-                )
-              }
-            >
-              Request
-            </button>
-          )}
+          {/* Key buttons for buy/request */}
+          {renderActions(listing)}
         </div>
       </div>
     );
   }
 
-  // Listing grid UI
   function renderListingGrid(filtered) {
     if (filtered.length === 0)
       return (
@@ -208,7 +285,68 @@ function EcoShareMainContainer({ loggedInUser }) {
     );
   }
 
-  // Main container UI
+  // Toast notification component (frontend-only confirmation)
+  function Toast({ text, onClose, type }) {
+    return (
+      <div
+        style={{
+          position: "fixed",
+          top: 24,
+          left: "50%",
+          transform: "translateX(-50%)",
+          background: type === "success" ? "var(--vivid-blue)" : "#fff0d6",
+          color: type === "success" ? "#fff" : "#222E",
+          borderRadius: 17,
+          fontWeight: 500,
+          fontSize: 16.5,
+          boxShadow: "0 3px 14px 0 rgba(52,65,134,0.16)",
+          zIndex: 2009,
+          padding: "15px 32px 15px 22px",
+          display: "flex",
+          alignItems: "center",
+          minWidth: 210,
+          maxWidth: "96vw",
+          gap: 18,
+        }}
+        role="alert"
+        onClick={onClose}
+        tabIndex={0}
+        aria-label="Close"
+      >
+        <span style={{ marginRight: 6 }}>
+          {type === "success" ? "✅" : "ℹ️"}
+        </span>
+        {text}
+        <button
+          style={{
+            marginLeft: "auto",
+            background: "none",
+            border: "none",
+            color: "#fff",
+            fontWeight: 700,
+            fontSize: 20,
+            cursor: "pointer",
+            filter: "drop-shadow(0 2px 7px rgba(0,0,0,0.09))",
+            padding: 0,
+          }}
+          title="Dismiss"
+          aria-label="Dismiss"
+          tabIndex={0}
+          onClick={onClose}
+        >
+          ×
+        </button>
+      </div>
+    );
+  }
+
+  // Auto-dismiss the toast after 2.5s
+  React.useEffect(() => {
+    if (!toast) return;
+    const timeout = setTimeout(() => setToast(null), 2500);
+    return () => clearTimeout(timeout);
+  }, [toast]);
+
   return (
     <div className="container eco-main">
       <div className="eco-main-header-row">
@@ -219,7 +357,6 @@ function EcoShareMainContainer({ loggedInUser }) {
             Support <span style={{ color: 'var(--kavia-orange)' }}>sustainability</span> and connect with others seeking affordable, quality items.
           </div>
         </div>
-        {/* Listing button */}
         <button
           className="btn btn-large eco-create-btn"
           onClick={handleCreateListing}
@@ -241,6 +378,13 @@ function EcoShareMainContainer({ loggedInUser }) {
         onClose={() => setModalOpen(false)}
         onSubmit={handleSubmitListing}
       />
+      {toast && (
+        <Toast
+          text={toast.text}
+          type={toast.type}
+          onClose={closeToast}
+        />
+      )}
       {/* Footer */}
       <footer className="eco-footer">
         <div>
