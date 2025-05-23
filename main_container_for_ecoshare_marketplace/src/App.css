@@ -113,8 +113,21 @@ body {
 .eco-listing-grid {
   margin-top: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* STRICT 3 columns desktop */
   gap: 32px;
+}
+
+@media (max-width: 1050px) {
+  .eco-listing-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+  }
+}
+@media (max-width: 650px) {
+  .eco-listing-grid {
+    grid-template-columns: 1fr;
+    gap: 19px;
+  }
 }
 
 .eco-card {
