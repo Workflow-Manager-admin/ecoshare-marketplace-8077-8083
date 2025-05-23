@@ -373,7 +373,7 @@ function EcoShareMainContainer({ loggedInUser }) {
   }, [toast]);
 
   return (
-    <div className="container eco-main">
+    <div className="container eco-main" style={{ maxWidth: "100vw" }}>
       <div className="eco-main-header-row">
         <div>
           <h1 className="title" style={{ marginBottom: 4 }}>EcoShare</h1>
