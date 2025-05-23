@@ -1,9 +1,13 @@
 :root {
   --kavia-orange: #E87A41;
   --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
+  --kavia-light-bg: #f8f9fa;
+  --kavia-card-bg: #fff;
+  --text-color: #232425;
+  --text-secondary: #6B6B6B;
+  --border-color: #ececec;
+  --box-shadow-card: 0 4px 20px 0 rgba(52, 65, 134, 0.08);
+  --footer-bg: #f1f3f4;
 }
 
 .eco-header {
