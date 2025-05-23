@@ -243,7 +243,7 @@ function EcoShareMainContainer({ loggedInUser }) {
             width: "100%",
             marginTop: 9
           }}
-          onClick={() => handleBuy(listing.id)}
+          onClick={() => handleBuy(listing)}
         >
           Buy
         </button>
@@ -257,7 +257,7 @@ function EcoShareMainContainer({ loggedInUser }) {
             width: "100%",
             marginTop: 9
           }}
-          onClick={() => handleRequest(listing.id)}
+          onClick={() => handleRequest(listing)}
         >
           Request
         </button>
@@ -402,6 +402,13 @@ function EcoShareMainContainer({ loggedInUser }) {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         onSubmit={handleSubmitListing}
+      />
+      <DetailsSidebarModal
+        open={detailsModal.open}
+        mode={detailsModal.mode}
+        item={detailsModal.item}
+        onSubmit={handleDetailsSubmit}
+        onClose={closeDetailsModal}
       />
       {toast && (
         <Toast
