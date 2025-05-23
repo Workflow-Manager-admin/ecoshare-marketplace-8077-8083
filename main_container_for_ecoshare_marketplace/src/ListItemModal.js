@@ -123,7 +123,7 @@ function ListItemModal({ open, onClose, onSubmit }) {
   }
 
   // To manually clear input value when image is removed
-  const imageInputRef = React.useRef();
+  // const imageInputRef = React.useRef();
 
   return (
     <div className="eco-modal-backdrop" tabIndex={-1}>
